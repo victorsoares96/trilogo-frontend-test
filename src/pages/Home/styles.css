@@ -1,0 +1,36 @@
+.react-kanban-board {
+  display: flex;
+  height: 100%;
+  align-items: center !important;
+}
+
+.react-kanban-column {
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 10px;
+  width: 350px;
+}
+
+.react-kanban-custom-column-header {
+  margin-left: -15px;
+  margin-top: -15px;
+  margin-right: -15px;
+  margin-bottom: 15px;
+
+  border-radius: 8px 8px 0px 0px;
+}
+
+.react-kanban-column > div:nth-of-type(2) {
+  max-height: 500px !important;
+  overflow-y: scroll;
+}
+
+.react-kanban-custom-column-header h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #141414;
+  padding: 15px;
+}
