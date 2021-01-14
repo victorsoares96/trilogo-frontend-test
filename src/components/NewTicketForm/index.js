@@ -27,6 +27,7 @@ const NewTicketForm = ({ closeModal }) => {
   const handleSubmit = (values) => {
     console.log(values);
     message.success(JSON.stringify(values));
+    form.resetFields();
     closeModal();
   }
   return (
@@ -39,12 +40,30 @@ const NewTicketForm = ({ closeModal }) => {
         }}
         style={{ display: 'flex', flexDirection: 'column' }}
         onFinish={handleSubmit}
-        onValuesChange={props => console.log(props)}
       >
-        <Form.Item label="Descrição" required>
-          <Input name='description' placeholder="Digite uma descrição:" style={{ width: '100%', borderRadius: 4 }} />
+        <Form.Item 
+        name='description' 
+        label="Descrição" 
+        rules={[
+          {
+            required: true,
+            message: 'Digite uma descrição!',
+          },
+        ]}
+        required>
+          <Input placeholder="Digite uma descrição:" style={{ width: '100%', borderRadius: 4 }} />
         </Form.Item>
-        <Form.Item label="Tipo" required>
+        
+        <Form.Item 
+        name='type' 
+        label="Tipo" 
+        rules={[
+          {
+            required: true,
+            message: 'Selecione um tipo!',
+          },
+        ]}
+        required>
           <Select defaultValue="default" style={{ width: '100%', borderRadius: 4 }} loading={false}>
             <Option value="default" disabled>Selecione um tipo:</Option>
             <Option value="bem">Bem</Option>
@@ -52,7 +71,17 @@ const NewTicketForm = ({ closeModal }) => {
             <Option value="procedimento">Procedimento</Option>
           </Select>
         </Form.Item>
-        <Form.Item label="Responsável" required>
+        
+        <Form.Item 
+        name='responsible' 
+        label="Responsável" 
+        rules={[
+          {
+            required: true,
+            message: 'Selecione um responsável!',
+          },
+        ]}
+        required>
           <Select defaultValue="default" style={{ width: '100%', borderRadius: 4 }} loading={false}>
             <Option value="default" disabled>Selecione um responsável:</Option>
             <Option value="joao">João</Option>
@@ -61,7 +90,7 @@ const NewTicketForm = ({ closeModal }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item label="Responsável">
+        <Form.Item label="Imagem">
           <Dragger {...props}>
             <p className="ant-upload-drag-icon">
               <InboxOutlined />

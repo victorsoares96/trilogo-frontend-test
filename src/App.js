@@ -9,7 +9,7 @@ import Home from './pages/Home';
 
 const App = () => {
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout>
       <Header />
       <Home />
     </Layout>
