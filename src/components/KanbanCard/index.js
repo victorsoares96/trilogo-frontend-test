@@ -1,7 +1,6 @@
 import { Card, Dropdown, Menu, Typography } from 'antd';
 import React from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
-import InfiniteScroll from 'react-infinite-scroller';
 
 import './styles.css';
 
