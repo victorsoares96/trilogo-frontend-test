@@ -28,3 +28,14 @@ Para dar início ao desafio, o candidato deve dar um fork neste repositório e, 
 * CSS Modules
 * Utilização do Ant Design (biblioteca React UI)
 * Persistencia dos dados em Local Storage
+
+----------------------------------------------------------------------------------
+**Para Rodar**
+
+- `git clone https://github.com/victorsoares96/trilogo-frontend-test`
+
+- `cd trilogo-frontend-test`
+
+- `yarn install`
+
+- `yarn start`
