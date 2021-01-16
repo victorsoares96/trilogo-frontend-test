@@ -1,9 +1,8 @@
 .react-kanban-board {
   display: flex;
   height: 100%;
-  align-items: center !important;
 
-  margin-top: 100px;
+  padding-top: 100px;
 }
 
 .react-kanban-column {

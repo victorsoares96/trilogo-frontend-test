@@ -17,7 +17,48 @@ function Home() {
         title: 'Abertos',
         color: 'rgba(245, 34, 45, 0.25)',
         cards: [
-          
+          {
+            id: 6523,
+            description: 'Consertar o vazamento',
+            type: 'Procedimento',
+            responsible: 'Yudi Tamashiro',
+            image: ''
+          },
+          {
+            id: 6524,
+            description: 'Consertar o vazamento',
+            type: 'Procedimento',
+            responsible: 'Priscilla Alcântara',
+            image: ticketIssue
+          },
+          {
+            id: 6525,
+            description: 'Consertar o vazamento',
+            type: 'Procedimento',
+            responsible: 'Yudi Tamashiro',
+            image: ''
+          },
+          {
+            id: 6526,
+            description: 'Consertar o vazamento',
+            type: 'Procedimento',
+            responsible: 'Yudi Tamashiro',
+            image: ''
+          },
+          {
+            id: 6527,
+            description: 'Consertar o vazamento',
+            type: 'Procedimento',
+            responsible: 'Yudi Tamashiro',
+            image: ''
+          },
+          {
+            id: 6528,
+            description: 'Consertar o vazamento',
+            type: 'Procedimento',
+            responsible: 'Yudi Tamashiro',
+            image: ''
+          }
         ]
       },
       {

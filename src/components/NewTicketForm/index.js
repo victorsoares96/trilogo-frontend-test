@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+/* eslint-disable no-restricted-globals */
+import React from 'react';
 import { Form, Input, Button, Select, Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+
+/* Helper's */
+import toBase64 from '../../utils/toBase64';
+import { addCard } from '@lourenci/react-kanban';
+import getRandomInt from '../../utils/getRandomInt';
 
 const NewTicketForm = ({ closeModal }) => {
   const [form] = Form.useForm();
@@ -9,8 +15,10 @@ const NewTicketForm = ({ closeModal }) => {
 
   const props = {
     name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    multiple: false,
+    method: 'get',
+    accept: "image/png, image/jpeg",
+    action: 'https://api.github.com/',
     onChange(info) {
       const { status } = info.file;
       if (status !== 'uploading') {
@@ -18,18 +26,45 @@ const NewTicketForm = ({ closeModal }) => {
       }
       if (status === 'done') {
         message.success(`${info.file.name} file uploaded successfully.`);
+        console.log(info.file)
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
-    message.success(JSON.stringify(values));
-    form.resetFields();
-    closeModal();
+    const { image } = values;
+    
+    try {
+      const board = JSON.parse(localStorage.getItem('@board:'));
+      const resultImage = await toBase64(image[0].originFileObj);
+      console.log(resultImage)
+      const newBoard = addCard(board, { id: 1 }, {
+        ...values,
+        id: getRandomInt(1, 1000),
+        image: resultImage,
+      });
+      localStorage.setItem('@board:', JSON.stringify(newBoard));
+      message.success('Adicionado!', 2, function () {
+        location.reload();
+      });
+
+      form.resetFields();
+      closeModal();
+    } catch (error) {
+      message.error('Um erro ocorreu.');
+      console.log(error);
+    }
   }
+
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList
+  };
   return (
     <>
       <Form
@@ -66,9 +101,9 @@ const NewTicketForm = ({ closeModal }) => {
         required>
           <Select defaultValue="default" style={{ width: '100%', borderRadius: 4 }} loading={false}>
             <Option value="default" disabled>Selecione um tipo:</Option>
-            <Option value="bem">Bem</Option>
-            <Option value="predial">Predial</Option>
-            <Option value="procedimento">Procedimento</Option>
+            <Option value="Bem">Bem</Option>
+            <Option value="Predial">Predial</Option>
+            <Option value="Procedimento">Procedimento</Option>
           </Select>
         </Form.Item>
         
@@ -84,14 +119,14 @@ const NewTicketForm = ({ closeModal }) => {
         required>
           <Select defaultValue="default" style={{ width: '100%', borderRadius: 4 }} loading={false}>
             <Option value="default" disabled>Selecione um responsável:</Option>
-            <Option value="joao">João</Option>
-            <Option value="maria">Maria</Option>
-            <Option value="jose">José</Option>
+            <Option value="João">João</Option>
+            <Option value="Maria">Maria</Option>
+            <Option value="José">José</Option>
           </Select>
         </Form.Item>
 
-        <Form.Item label="Imagem">
-          <Dragger {...props}>
+        <Form.Item name='image' label="Imagem" valuePropName='fileList' getValueFromEvent={normFile}>
+          <Dragger {...props} name='image'>
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
